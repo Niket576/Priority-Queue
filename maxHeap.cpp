@@ -16,10 +16,39 @@ class MaxHeap {
             }
         }
     }
+    void downheapify(int idx) {
+        while(idx < hp.size()) {
+            int lc = 2*idx + 1;
+            int rc = 2*idx + 2;
+            if(lc >= hp.size()) break;  //idx-> leaf
+            int maxEl = idx;
+            if(hp[lc] > hp[maxEl]) {
+                maxEl = lc;
+            }
+            if(rc < hp.size() && hp[rc] > hp[maxEl]) {
+                maxEl = rc;
+            }
+            if(maxEl != idx) {
+                swap(hp[idx],hp[maxEl]);
+                idx = maxEl;    //for next iteration
+            } else {
+                break;
+            }
+        }
+    }
     public: 
         void push(int ele) {
             hp.push_back(ele);
             upheapify(hp.size()-1);
+        }
+        void pop() {
+            //remove the highest priority element
+            if(empty()) return;
+            swap(hp[0],hp[hp.size()-1]);
+            hp.pop_back();
+            if(!empty()) {
+                downheapify(0);
+            }
         }
         int peek() {
             if(empty()) return INT_MIN; //if hp is empty then INT_MIN is the greatest element-logically that's true
@@ -48,5 +77,9 @@ int main() {
     hp.push(44);
     hp.push(50);
     hp.display();
+
+    hp.pop();
+    hp.display();
+    
     return 0;
 }
