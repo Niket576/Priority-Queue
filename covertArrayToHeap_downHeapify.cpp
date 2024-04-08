@@ -67,6 +67,7 @@ class MaxHeap {
         }
         MaxHeap(vector<int> v) {
             hp = v;
+            //T.C = O(n)
             int n = hp.size();
             for(int i=n/2; i>=0; i--) {
                 downheapify(i);
@@ -74,7 +75,7 @@ class MaxHeap {
         }
 };
 int main() {
-    vector<int> v {9,6,1,19,3,2,8,12,5};
+    vector<int> v = {9,6,1,19,3,2,8,12,5};
     MaxHeap hp(v);
     hp.display();
     hp.push(100);
